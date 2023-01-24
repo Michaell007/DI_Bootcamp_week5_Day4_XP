@@ -1,4 +1,4 @@
-<button (click)="GetExchangeData()">Get Exchange Rate Updates</button>
-<button (click)="stopExchangeUpdates()">Stop Exchange Rate Updates</button>
-
+<ul>
+    <li *ngFor="let data of datas | async; index as i"> {{ data }} </li>
+</ul>
 <router-outlet></router-outlet>

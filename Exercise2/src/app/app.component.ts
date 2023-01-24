@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AService } from './a.service';
+import { Observable } from 'rxjs';
+import { StartService } from './services/start.service';
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,12 @@ import { AService } from './a.service';
 })
 export class AppComponent implements OnInit {
   title = 'Exercise2';
+  datas!: Observable<any>;
 
-  constructor(private serv: AService) { }
+  constructor(private _serviceStart: StartService) { }
 
   ngOnInit() {
-    this.serv.returnAsObservable().subscribe(data => console.log(data));
-  }
-
-  GetExchangeData() {
-    this.serv.GetExchangeData();
-  }
-
-  stopExchangeUpdates() {
-    this.serv.stopExchangeUpdates();
+    this._serviceStart.getEventSendOnServer("http://").subscribe( (response: any) => this.datas = response);
   }
 
 }
